@@ -11,25 +11,28 @@ _rotine:                                ## @rotine
 	movq	%rsp, %rbp
 	.cfi_def_cfa_register %rbp
 	subq	$16, %rsp
-	movl	$0, -4(%rbp)
+	movq	_mutix@GOTPCREL(%rip), %rdi
+	movq	$0, -8(%rbp)
+	callq	_pthread_mutex_lock
 LBB0_1:                                 ## =>This Inner Loop Header: Depth=1
-	movl	-4(%rbp), %eax
-	movl	%eax, %ecx
-	addl	$1, %ecx
-	movl	%ecx, -4(%rbp)
-	cmpl	$100, %eax
-	jge	LBB0_7                                ##   in Loop: Header=BB0_1 Depth=1
-LBB0_6:                                 ##   in Loop: Header=BB0_1 Depth=1
-	movl	_x(%rip), %eax
-	cmpl	$0, _x(%rip)
-	movl	$100, %edi
-	callq	_usleep
-	addl	$1, %eax
-	movl	%eax, _x(%rip)
+	movq	-8(%rbp), %rax
+	movq	%rax, %rcx
+	addq	$1, %rcx
+	movq	%rcx, -8(%rbp)
+	cmpq	$1000000000, %rax       ## imm = 0x3B9ACA00
+	jge	LBB0_3
+## %bb.2:                               ##   in Loop: Header=BB0_1 Depth=1
+	movq	_x(%rip), %rax
+	addq	$1, %rax
+	movq	%rax, _x(%rip)
 	jmp	LBB0_1
-LBB0_7:
-	xorl	%eax, %eax
-                                        ## kill: def $rax killed $eax
+LBB0_3:
+	movq	_mutix@GOTPCREL(%rip), %rdi
+	callq	_pthread_mutex_unlock
+	xorl	%ecx, %ecx
+	movl	%ecx, %edx
+	movl	%eax, -12(%rbp)         ## 4-byte Spill
+	movq	%rdx, %rax
 	addq	$16, %rsp
 	popq	%rbp
 	retq
@@ -45,13 +48,23 @@ _main:                                  ## @main
 	.cfi_offset %rbp, -16
 	movq	%rsp, %rbp
 	.cfi_def_cfa_register %rbp
-	subq	$48, %rsp
+	subq	$64, %rsp
+	movq	_mutix@GOTPCREL(%rip), %rdi
 	xorl	%eax, %eax
-	movl	%eax, %ecx
-	leaq	_rotine(%rip), %rdx
+	movl	%eax, %esi
 	movl	$0, -4(%rbp)
+	callq	_pthread_mutex_init
+	xorl	%ecx, %ecx
+	movl	%ecx, %edx
+	leaq	_rotine(%rip), %rsi
 	leaq	-16(%rbp), %rdi
-	movq	%rcx, %rsi
+	movq	%rsi, -48(%rbp)         ## 8-byte Spill
+	movq	%rdx, %rsi
+	movq	-48(%rbp), %r8          ## 8-byte Reload
+	movq	%rdx, -56(%rbp)         ## 8-byte Spill
+	movq	%r8, %rdx
+	movq	-56(%rbp), %rcx         ## 8-byte Reload
+	movl	%eax, -60(%rbp)         ## 4-byte Spill
 	callq	_pthread_create
 	cmpl	$0, %eax
 	je	LBB1_2
@@ -135,22 +148,26 @@ LBB1_14:
 	movl	$3, -4(%rbp)
 	jmp	LBB1_17
 LBB1_16:
-	movl	_x(%rip), %esi
+	movq	_mutix@GOTPCREL(%rip), %rdi
+	callq	_pthread_mutex_destroy
+	movq	_x(%rip), %rsi
 	leaq	L_.str(%rip), %rdi
+	movl	%eax, -64(%rbp)         ## 4-byte Spill
 	movb	$0, %al
 	callq	_printf
 	movl	$0, -4(%rbp)
 LBB1_17:
 	movl	-4(%rbp), %eax
-	addq	$48, %rsp
+	addq	$64, %rsp
 	popq	%rbp
 	retq
 	.cfi_endproc
                                         ## -- End function
 	.globl	_x                      ## @x
-.zerofill __DATA,__common,_x,4,2
+.zerofill __DATA,__common,_x,8,3
+	.comm	_mutix,64,3             ## @mutix
 	.section	__TEXT,__cstring,cstring_literals
 L_.str:                                 ## @.str
-	.asciz	"%d\n"
+	.asciz	"%lu\n"
 
 .subsections_via_symbols
