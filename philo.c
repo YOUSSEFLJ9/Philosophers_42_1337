@@ -6,18 +6,38 @@
 /*   By: ymomen <ymomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 17:20:07 by ymomen            #+#    #+#             */
-/*   Updated: 2024/05/23 23:31:24 by ymomen           ###   ########.fr       */
+/*   Updated: 2024/05/25 19:42:03 by ymomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void philo(char **av, int ac)
+static int pars_input(char **av, int ac, t_data *data)
 {
-	int i;
-	t_philo philo;
-	init_values(&philo, av, ac);
-	
+	data->nb_philo = ft_atoi(av[1]);
+	data->time_to_die = ft_atoi(av[2]);
+	data->time_to_eat = ft_atoi(av[3]);
+	data->time_to_sleep = ft_atoi(av[4]);
+	if (ac == 6)
+		data->nb_meals = ft_atoi(av[5]);
+	else
+		data->nb_meals = -1;
+	if(data->nb_philo < 1 || data->time_to_die < 1 || data->time_to_eat < 1 || data->time_to_sleep < 1 || (ac == 6 && data->nb_meals < 1))
+	{
+		error("Error: wrong arguments\n");
+		return (1);
+	}	
+	return (0);
+}
+
+int philo(char **av, int ac)
+{
+	// int i;
+	t_data data;
+	if (pars_input(av, ac, &data))
+		return (1);
+	init_values(&data);
+	return (0);
 }
 
 

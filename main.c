@@ -6,7 +6,7 @@
 /*   By: ymomen <ymomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 16:31:53 by ymomen            #+#    #+#             */
-/*   Updated: 2024/05/21 17:19:54 by ymomen           ###   ########.fr       */
+/*   Updated: 2024/05/25 19:07:46 by ymomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,12 @@
 
 int	main(int ac, char **av)
 {
-	if (ac == 5 || ac == 6)
-		philo(av, ac);
-	else
+	if (ac != 5 && ac != 6 )
+	{
 		error("Error: wrong number of arguments\n");
+		return (1);	
+	}
+	if (philo(av, ac))
+		return (1);
 	return (0);
-}
+}	
