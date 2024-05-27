@@ -6,28 +6,66 @@
 /*   By: ymomen <ymomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 19:30:41 by ymomen            #+#    #+#             */
-/*   Updated: 2024/05/25 19:59:21 by ymomen           ###   ########.fr       */
+/*   Updated: 2024/05/26 02:48:46 by ymomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void save_mutex(pthread_mutex_t mutex, t_mutex type)
+int save_mutex(pthread_mutex_t mutex, t_mutex type)
 {
+	int ret;
+
+	ret = 0;
 	if (type == INIT)
-		pthread_mutex_init(&mutex, NULL);
+		ret = pthread_mutex_init(&mutex, NULL);
 	else if (type == DESTROY)
-		pthread_mutex_destroy(&mutex);
+		ret = pthread_mutex_destroy(&mutex);
 	else if (type == LOCK)
-		pthread_mutex_lock(&mutex);
+		ret = pthread_mutex_lock(&mutex);
 	else if (type == UNLOCK)
-		pthread_mutex_unlock(&mutex);
+		ret = pthread_mutex_unlock(&mutex);
+	if (ret)
+		error("Error in mutex");
+	return (ret);
 }
-void assine_forks(t_philo *philo, int i)
+static void assign_forks(t_data *data, int i)
 {
+	pthread_mutex_t *left;
+	pthread_mutex_t *right;
+	
+
+	left = &data->forks[i];
+	right = &data->forks[(i + 1) % data->nb_philo];
+	if (i % 2 == 0)
+	{
+		data->philo[i].first_fk = left;
+		data->philo[i].second_fk = right;
+	}
+	else
+	{
+		data->philo[i].first_fk = right;
+		data->philo[i].second_fk = left;
+	}
+	
 	
 }
 
+static int init_philos(t_philo *philo, t_data *data)
+{
+	int i;
+	i = 0;
+	while (i < data->nb_philo)
+	{
+		philo[i].idx_philo = i + 1;
+		philo[i].meals_cont = 0;
+		philo[i].is_full = 0;
+		philo[i].last_meal_time = 0;
+		assign_forks(data, i);
+		i++;
+	}
+	return (0);
+}
 int init_values(t_data *data)
 {
 	int i;
@@ -43,12 +81,10 @@ int init_values(t_data *data)
 	i = 0;
 	while (i < data->nb_philo)
 	{
-		save_mutex(data->forks[i], INIT);
-		data->philo[i].idx_philo = i + 1;
-		data->philo[i].meals_cont = 0;
-		data->philo[i].is_full = 0;
-		data->philo[i].last_meal_time = 0;
-		assine_forks(data->philo, i);
-		
+		if (save_mutex(data->forks[i], INIT))
+			return (1);
+		i++;
 	}
+	init_philos(data->philo, data);
+	return (0);
 }

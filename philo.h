@@ -6,7 +6,7 @@
 /*   By: ymomen <ymomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 12:34:23 by ymomen            #+#    #+#             */
-/*   Updated: 2024/05/25 19:58:35 by ymomen           ###   ########.fr       */
+/*   Updated: 2024/05/26 06:08:29 by ymomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <sys/time.h>
 #include <limits.h>
 # define MAX_DOUBLE 922337203685477580
-
+# define MINIM_INPUT 60000
 typedef enum e_mutex
 {
 	INIT,
@@ -30,10 +30,9 @@ typedef enum e_mutex
 typedef struct s_philo
 {
 	int		idx_philo; // start from 1
-	long	meals_cont;
 	int		is_full;
+	long	meals_cont;
 	long	last_meal_time;
-	long	start_time;//checkafter
 	pthread_mutex_t	*first_fk;
 	pthread_mutex_t	*second_fk;
 	pthread_t	philo;
@@ -46,6 +45,7 @@ typedef struct s_data
 	int		time_to_eat;
 	int		time_to_sleep;
 	int		nb_meals;
+	long	start_time;//check after
 	t_philo *philo;
 	pthread_mutex_t *forks; // array of forks start from 0 to nb_philo - 1
 	int		is_die;
@@ -54,6 +54,9 @@ typedef struct s_data
 }	t_data;
 
 /* FUNCTIONS */
+void start_simulation(t_data *data);
+int save_mutex(pthread_mutex_t mutex, t_mutex type);
+int init_values(t_data *data);
 int		philo(char **av, int ac);
 int		ft_atoi(const char *str);
 void	error(char *str);

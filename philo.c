@@ -6,7 +6,7 @@
 /*   By: ymomen <ymomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 17:20:07 by ymomen            #+#    #+#             */
-/*   Updated: 2024/05/25 19:42:03 by ymomen           ###   ########.fr       */
+/*   Updated: 2024/05/26 02:57:40 by ymomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,27 @@
 static int pars_input(char **av, int ac, t_data *data)
 {
 	data->nb_philo = ft_atoi(av[1]);
-	data->time_to_die = ft_atoi(av[2]);
-	data->time_to_eat = ft_atoi(av[3]);
-	data->time_to_sleep = ft_atoi(av[4]);
+	data->time_to_die = ft_atoi(av[2]) * 1000;
+	data->time_to_eat = ft_atoi(av[3]) * 1000;
+	data->time_to_sleep = ft_atoi(av[4]) * 1000;
 	if (ac == 6)
 		data->nb_meals = ft_atoi(av[5]);
 	else
 		data->nb_meals = -1;
-	if(data->nb_philo < 1 || data->time_to_die < 1 || data->time_to_eat < 1 || data->time_to_sleep < 1 || (ac == 6 && data->nb_meals < 1))
+	if(data->nb_philo < 1 || data->time_to_die < MINIM_INPUT || data->time_to_eat < MINIM_INPUT || data->time_to_sleep < MINIM_INPUT)
 	{
-		error("Error: wrong arguments\n");
+		if (data->nb_philo < 1)
+			error("Error: wrong number of philosophers\n");
+		else if (data->time_to_die < MINIM_INPUT)
+			error("Error: wrong time to die\n");
+		else if (data->time_to_eat < MINIM_INPUT)
+			error("Error: wrong time to eat\n");
+		else if (data->time_to_sleep < MINIM_INPUT)
+			error("Error: wrong time to sleep\n");
+		else if (ac == 6 && data->nb_meals < 1)
+			error("Error: wrong number of meals\n");
+		else
+			error("Error: wrong arguments\n");
 		return (1);
 	}	
 	return (0);
@@ -37,6 +48,7 @@ int philo(char **av, int ac)
 	if (pars_input(av, ac, &data))
 		return (1);
 	init_values(&data);
+	start_simulation(&data);
 	return (0);
 }
 
