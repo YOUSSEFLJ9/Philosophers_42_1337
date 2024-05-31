@@ -6,7 +6,7 @@
 /*   By: ymomen <ymomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 17:20:07 by ymomen            #+#    #+#             */
-/*   Updated: 2024/05/26 02:57:40 by ymomen           ###   ########.fr       */
+/*   Updated: 2024/05/31 17:14:03 by ymomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 static int pars_input(char **av, int ac, t_data *data)
 {
 	data->nb_philo = ft_atoi(av[1]);
-	data->time_to_die = ft_atoi(av[2]) * 1000;
-	data->time_to_eat = ft_atoi(av[3]) * 1000;
-	data->time_to_sleep = ft_atoi(av[4]) * 1000;
+	data->time_to_die = ft_atoi(av[2]);
+	data->time_to_eat = ft_atoi(av[3]);
+	data->time_to_sleep = ft_atoi(av[4]);
 	if (ac == 6)
 		data->nb_meals = ft_atoi(av[5]);
 	else
@@ -43,12 +43,12 @@ static int pars_input(char **av, int ac, t_data *data)
 
 int philo(char **av, int ac)
 {
-	// int i;
 	t_data data;
 	if (pars_input(av, ac, &data))
 		return (1);
 	init_values(&data);
 	start_simulation(&data);
+	// monitor(&data);
 	return (0);
 }
 
