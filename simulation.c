@@ -6,7 +6,7 @@
 /*   By: ymomen <ymomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 02:49:42 by ymomen            #+#    #+#             */
-/*   Updated: 2024/05/31 21:01:02 by ymomen           ###   ########.fr       */
+/*   Updated: 2024/06/01 23:48:49 by ymomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ long get_time_milli(long start_time)
 
 void wait_all_philos(t_philo *philo)
 {
-	while (get_variable_int(&(philo->data->all_ready_mtx), philo->data->all_ready)  == 0)
+	while (get_variable_int(&(philo->data->all_ready_mtx), philo->data->all_ready)  != 1)
 			;
 }
 
@@ -64,14 +64,14 @@ void *simulation_routine(void *args)
 	
 	philo = (t_philo *)args;
 	wait_all_philos(philo);
-	if (philo->idx_philo % 2 != 0)
+	if (philo->idx_philo % 2 == 0)
 		usleep(600);
 	while(1)
 	{
+		if (get_variable_int(&(philo->data->all_ready_mtx ),philo->data->nb_meals)!= -1 && philo->meals_cont == get_variable_int(&(philo->data->all_ready_mtx) ,philo->data->nb_meals))
+			break;
 		if (get_variable_int(&(philo->data->is_die_mtx), philo->data->is_die))
-			exit(1);
-		// if (get_variable_int(&(philo->data->all_ready_mtx ),philo->data->nb_meals)!= -1 && philo->meals_cont == get_variable_int(&(philo->data->all_ready_mtx) ,philo->data->nb_meals))
-		// 	break;
+			return (NULL);
 		eat(philo);
 		if (get_variable_int((&philo->data->is_die_mtx) ,philo->data->is_die))
 		return (NULL) ;
@@ -98,6 +98,9 @@ void start_simulation(t_data *data)
 	data->start_time = get_time();
 	if (data->nb_philo == 1)
 	{
+		printf("%ld %d philo has taken a fork\n",get_time() - data->start_time ,data->philo->idx_philo);
+		my_usleep(data->time_to_die);
+		printf("%ld %d philo is die\n", get_time() - data->start_time , data->philo->idx_philo);
 	}
 	else
 	{

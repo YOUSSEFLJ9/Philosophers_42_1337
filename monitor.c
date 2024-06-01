@@ -6,7 +6,7 @@
 /*   By: ymomen <ymomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 15:41:20 by ymomen            #+#    #+#             */
-/*   Updated: 2024/05/31 20:56:02 by ymomen           ###   ########.fr       */
+/*   Updated: 2024/06/01 23:40:50 by ymomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,17 @@ void monitor(t_data *data)
 		i  = -1;
 		while(++i < data->nb_philo)
 		{
-			if (get_time() - data->philo[i].last_meal_time > data->time_to_die)
+			if (get_time() - data->philo[i].last_meal_time > data->time_to_die && data->philo[i].meals_cont != get_variable(&data->all_ready_mtx ,data->nb_meals) && !get_variable(&data->is_die_mtx, data->is_die))
 			{
 				set_variable_int(&(data->is_die_mtx), &data->is_die, 1);
 				save_mutex(&data->print, LOCK);
-				printf("%ld %d philo is die\n", get_time() - data->start_time , data->philo->idx_philo);
-				save_mutex(&data->print, UNLOCK);
+				printf("%ld %d philo is die\n", get_time() - data->start_time , data->philo[i].idx_philo);
+				//save_mutex(&data->print, UNLOCK);
 			}
+			else if (data->philo[i].meals_cont == get_variable(&data->all_ready_mtx ,data->nb_meals))
+				data->all_ready = 1337;
 		}
+		if (data->all_ready == 1337)
+			break;
 	}
 }
