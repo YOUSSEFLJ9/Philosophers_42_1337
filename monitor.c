@@ -6,7 +6,7 @@
 /*   By: ymomen <ymomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 15:41:20 by ymomen            #+#    #+#             */
-/*   Updated: 2024/06/02 00:52:11 by ymomen           ###   ########.fr       */
+/*   Updated: 2024/06/03 00:30:20 by ymomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,25 +18,22 @@ void	monitor(t_data *data)
 {
 	int	i;
 
-	while (!get_variable_int(&(data->is_die_mtx), data->is_die))
+	while (!get_var_int(&(data->isdiemtx), &(data->is_die)))
 	{
 		i = -1;
-		while (++i < data->nb_philo)
+		while (++i < get_var_int(&(data->nb_philomtx), &(data->nb_philo)))
 		{
-			if (get_time() - data->philo[i].last_meal_time > data->time_to_die \
-			&& data->philo[i].meals_cont != get_variable(&data->all_ready_mtx, \
-			data->nb_meals) && !get_variable(&data->is_die_mtx, data->is_die))
+			if (get_time() - get_var(&(data->philo[i].save_mutex) ,&(data->philo[i].last_meal_time)) > get_var_int(&(data->todie_mtx),&(data->time_to_die)) && get_var(&(data->philo[i].save_mutex),&(data->philo[i].meals_cont)) != get_var_int(&(data->nb_mealmtx), &(data->nb_meals)) && !get_var_int(&(data->isdiemtx), &(data->is_die)))
 			{
-				set_variable_int(&(data->is_die_mtx), &data->is_die, 1);
-				save_mutex(&data->print, LOCK);
-				printf("%ld %d philo is die\n", get_time() - data->start_time, \
+				set_var_int(&(data->isdiemtx), &(data->is_die), 1);
+				save_mutex(&data->toprint, LOCK);
+				printf("%ld %d philo is die\n", get_time() - get_var(&(data->starttimemtx), &(data->start_time)), \
 				data->philo[i].idx);
 			}
-			else if (data->philo[i].meals_cont == get_variable(\
-			&data->all_ready_mtx, data->nb_meals))
-				data->all_ready = 1337;
+			else if (get_var(&(data->philo[i].save_mutex), &(data->philo[i].meals_cont)) == get_var_int( &data->nb_mealmtx, &(data->nb_meals)))
+				set_var_int(&(data->readymtx), &(data->all_ready), 1337);
 		}
-		if (data->all_ready == 1337)
+		if (get_var_int(&(data->readymtx), &(data->all_ready)) == 1337)
 			break ;
 	}
 }

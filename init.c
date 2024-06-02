@@ -6,7 +6,7 @@
 /*   By: ymomen <ymomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 19:30:41 by ymomen            #+#    #+#             */
-/*   Updated: 2024/06/02 00:52:23 by ymomen           ###   ########.fr       */
+/*   Updated: 2024/06/02 23:42:49 by ymomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ static int	init_philos(t_philo *philo, t_data *data)
 		philo[i].is_full = 0;
 		philo[i].last_meal_time = get_time();
 		philo[i].data = data;
+		if (save_mutex(&philo[i].save_mutex, INIT))
+			return (1);
 		assign_forks(data, i);
 		i++;
 	}
@@ -80,10 +82,7 @@ int	init_values(t_data *data)
 	i = -1;
 	data->all_ready = 0;
 	data->is_die = 0;
-	if (save_mutex(&(data->all_ready_mtx), INIT) || save_mutex(\
-		&(data->is_die_mtx), INIT) || save_mutex(&(data->sleep_mtx), INIT)
-		|| save_mutex(&(data->last_meal_mtx), INIT
-			|| save_mutex(&(data->print), INIT)))
+	if (save_mutex(&data->todie_mtx, INIT) || save_mutex(&data->toeat_mtx, INIT) || save_mutex(&data->tosleep_mtx, INIT) || save_mutex(&data->nb_mealmtx, INIT) || save_mutex(&data->readymtx, INIT) || save_mutex(&data->starttimemtx, INIT) || save_mutex(&data->isdiemtx, INIT) || save_mutex(&data->toprint, INIT) || save_mutex(&data->nb_philomtx, INIT))
 		return (1);
 	while (++i < data->nb_philo)
 	{

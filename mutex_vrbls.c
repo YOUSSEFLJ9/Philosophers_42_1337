@@ -6,13 +6,13 @@
 /*   By: ymomen <ymomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 12:30:48 by ymomen            #+#    #+#             */
-/*   Updated: 2024/06/02 00:53:05 by ymomen           ###   ########.fr       */
+/*   Updated: 2024/06/02 23:20:30 by ymomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	set_variable(pthread_mutex_t *mutex, long *var, long value)
+int	set_var(pthread_mutex_t *mutex, long *var, long value)
 {
 	int	ret;
 
@@ -22,20 +22,20 @@ int	set_variable(pthread_mutex_t *mutex, long *var, long value)
 	return (ret);
 }
 
-long	get_variable(pthread_mutex_t *mutex, long var)
+long	get_var(pthread_mutex_t *mutex, long *var)
 {
 	long	ret;
 	long	value;
 
 	ret = save_mutex(mutex, LOCK);
-	value = var;
+	value = *var;
 	ret = save_mutex(mutex, UNLOCK);
 	if (ret)
 		return (-1);
 	return (value);
 }
 
-int	increce_variable(pthread_mutex_t *mutex, long *var)
+int	increce_var(pthread_mutex_t *mutex, long *var)
 {
 	int	ret;
 
@@ -45,7 +45,7 @@ int	increce_variable(pthread_mutex_t *mutex, long *var)
 	return (ret);
 }
 
-int	set_variable_int(pthread_mutex_t *mutex, int *var, int value)
+int	set_var_int(pthread_mutex_t *mutex, int *var, int value)
 {
 	int	ret;
 
@@ -55,13 +55,13 @@ int	set_variable_int(pthread_mutex_t *mutex, int *var, int value)
 	return (ret);
 }
 
-int	get_variable_int(pthread_mutex_t *mutex, int var)
+int	get_var_int(pthread_mutex_t *mutex, int *var)
 {
 	int	ret;
 	int	value;
 
 	ret = save_mutex(mutex, LOCK);
-	value = var;
+	value = *var;
 	ret = save_mutex(mutex, UNLOCK);
 	if (ret)
 		return (-1);

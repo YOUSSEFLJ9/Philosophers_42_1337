@@ -6,13 +6,13 @@
 #    By: ymomen <ymomen@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/25 18:53:10 by ymomen            #+#    #+#              #
-#    Updated: 2024/05/31 16:19:27 by ymomen           ###   ########.fr        #
+#    Updated: 2024/06/03 00:31:49 by ymomen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC=CC
-CFLAGS=-Wall -Wextra -Werror -pthread
-SRC=main.c philo.c outils.c ft_atoi.c init.c simulation.c mutex_vrbls.c monitor.c #threads.c actions.c
+CFLAGS=-Wall -Wextra -Werror -pthread -g -fsanitize=thread
+SRC=main.c philo.c outils.c ft_atoi.c init.c simulation.c mutex_vrbls.c monitor.c
 OBJ=$(SRC:.c=.o)
 NAME=philo
 HEADER=philo.h

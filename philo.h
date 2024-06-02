@@ -6,7 +6,7 @@
 /*   By: ymomen <ymomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 12:34:23 by ymomen            #+#    #+#             */
-/*   Updated: 2024/06/02 00:54:06 by ymomen           ###   ########.fr       */
+/*   Updated: 2024/06/02 23:31:55 by ymomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,11 @@ typedef enum e_mutex
 }	t_mutex;
 typedef struct s_philo
 {
-	int				idx; // start from 1
+	int				idx;
 	int				is_full;
 	long			meals_cont;
 	long			last_meal_time;
+	pthread_mutex_t	save_mutex;
 	pthread_mutex_t	*first_fk;
 	pthread_mutex_t	*second_fk;
 	pthread_t		philo;
@@ -43,19 +44,23 @@ typedef struct s_philo
 typedef struct s_data
 {
 	int				nb_philo;
+	pthread_mutex_t nb_philomtx;
 	int				time_to_die;
+	pthread_mutex_t todie_mtx;
 	int				time_to_eat;
+	pthread_mutex_t toeat_mtx;
 	int				time_to_sleep;
+	pthread_mutex_t tosleep_mtx;
 	int				nb_meals;
+	pthread_mutex_t nb_mealmtx;
 	int				all_ready;
-	long			start_time;//check after
+	pthread_mutex_t readymtx;
+	long			start_time;
+	pthread_mutex_t starttimemtx;
 	t_philo			*philo;
 	int				is_die;
-	pthread_mutex_t	sleep_mtx;
-	pthread_mutex_t	last_meal_mtx;
-	pthread_mutex_t	is_die_mtx;
-	pthread_mutex_t	all_ready_mtx;
-	pthread_mutex_t	print;
+	pthread_mutex_t isdiemtx;
+	pthread_mutex_t	toprint;
 	pthread_mutex_t	*forks; // array of forks start from 0 to nb_philo - 1
 }	t_data;
 
@@ -72,10 +77,10 @@ int		philo(char **av, int ac);
 int		ft_atoi(const char *str);
 void	error(char *str);
 /*DATA_FROM_VAR_PROTECT_WITH_MUTEX*/
-int		get_variable_int(pthread_mutex_t *mutex, int var);
-int		set_variable_int(pthread_mutex_t *mutex, int *var, int value);
-int		increce_variable(pthread_mutex_t *mutex, long *var);
-long	get_variable(pthread_mutex_t *mutex, long var);
-int		set_variable(pthread_mutex_t *mutex, long *var, long value);
+int		get_var_int(pthread_mutex_t *mutex, int *var);
+int		set_var_int(pthread_mutex_t *mutex, int *var, int value);
+int		increce_var(pthread_mutex_t *mutex, long *var);
+long	get_var(pthread_mutex_t *mutex, long *var);
+int		set_var(pthread_mutex_t *mutex, long *var, long value);
 
 #endif /*PHILO_H*/
