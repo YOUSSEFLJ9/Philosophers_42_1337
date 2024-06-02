@@ -6,15 +6,15 @@
 /*   By: ymomen <ymomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 19:30:41 by ymomen            #+#    #+#             */
-/*   Updated: 2024/06/01 23:35:32 by ymomen           ###   ########.fr       */
+/*   Updated: 2024/06/02 00:52:23 by ymomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int save_mutex(pthread_mutex_t *mutex, t_mutex type)
+int	save_mutex(pthread_mutex_t *mutex, t_mutex type)
 {
-	int ret;
+	int	ret;
 
 	ret = 0;
 	if (type == INIT)
@@ -29,11 +29,11 @@ int save_mutex(pthread_mutex_t *mutex, t_mutex type)
 		error("Error in mutex\n");
 	return (ret);
 }
-static void assign_forks(t_data *data, int i)
+
+static	void	assign_forks(t_data *data, int i)
 {
-	pthread_mutex_t *left;
-	pthread_mutex_t *right;
-	
+	pthread_mutex_t	*left;
+	pthread_mutex_t	*right;
 
 	left = &data->forks[i];
 	right = &data->forks[(i + 1) % data->nb_philo];
@@ -49,13 +49,14 @@ static void assign_forks(t_data *data, int i)
 	}
 }
 
-static int init_philos(t_philo *philo, t_data *data)
+static int	init_philos(t_philo *philo, t_data *data)
 {
-	int i;
+	int	i;
+
 	i = 0;
 	while (i < data->nb_philo)
 	{
-		philo[i].idx_philo = i + 1;
+		philo[i].idx = i + 1;
 		philo[i].meals_cont = 0;
 		philo[i].is_full = 0;
 		philo[i].last_meal_time = get_time();
@@ -65,28 +66,29 @@ static int init_philos(t_philo *philo, t_data *data)
 	}
 	return (0);
 }
-int init_values(t_data *data)
+
+int	init_values(t_data *data)
 {
-	int i;
+	int	i;
+
 	data->philo = malloc(sizeof(t_philo) * data->nb_philo);
 	if (!data->philo)
 		return (1);
 	data->forks = malloc(sizeof(pthread_mutex_t) * data->nb_philo);
 	if (!data->forks)
-	{
-		free(data->philo);
-		return (1);
-	}
-	i = 0;
+		return (free(data->philo), 1);
+	i = -1;
 	data->all_ready = 0;
 	data->is_die = 0;
-	if (save_mutex(&(data->all_ready_mtx), INIT) || save_mutex(&(data->is_die_mtx), INIT) || save_mutex(&(data->sleep_mtx), INIT) || save_mutex(&(data->last_meal_mtx), INIT || save_mutex(&(data->print), INIT)))
+	if (save_mutex(&(data->all_ready_mtx), INIT) || save_mutex(\
+		&(data->is_die_mtx), INIT) || save_mutex(&(data->sleep_mtx), INIT)
+		|| save_mutex(&(data->last_meal_mtx), INIT
+			|| save_mutex(&(data->print), INIT)))
 		return (1);
-	while (i < data->nb_philo)
+	while (++i < data->nb_philo)
 	{
 		if (save_mutex(&(data->forks[i]), INIT))
 			return (1);
-		i++;
 	}
 	init_philos(data->philo, data);
 	return (0);

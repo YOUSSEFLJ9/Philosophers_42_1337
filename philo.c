@@ -6,13 +6,13 @@
 /*   By: ymomen <ymomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 17:20:07 by ymomen            #+#    #+#             */
-/*   Updated: 2024/05/31 17:14:03 by ymomen           ###   ########.fr       */
+/*   Updated: 2024/06/02 00:56:01 by ymomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static int pars_input(char **av, int ac, t_data *data)
+static int	pars_input(char **av, int ac, t_data *data)
 {
 	data->nb_philo = ft_atoi(av[1]);
 	data->time_to_die = ft_atoi(av[2]);
@@ -22,46 +22,27 @@ static int pars_input(char **av, int ac, t_data *data)
 		data->nb_meals = ft_atoi(av[5]);
 	else
 		data->nb_meals = -1;
-	if(data->nb_philo < 1 || data->time_to_die < MINIM_INPUT || data->time_to_eat < MINIM_INPUT || data->time_to_sleep < MINIM_INPUT)
+	if (data->nb_philo < 1 || data->time_to_die < MINIM_INPUT \
+	|| data->time_to_eat < MINIM_INPUT || data->time_to_sleep < MINIM_INPUT)
 	{
-		if (data->nb_philo < 1)
-			error("Error: wrong number of philosophers\n");
-		else if (data->time_to_die < MINIM_INPUT)
-			error("Error: wrong time to die\n");
-		else if (data->time_to_eat < MINIM_INPUT)
-			error("Error: wrong time to eat\n");
-		else if (data->time_to_sleep < MINIM_INPUT)
-			error("Error: wrong time to sleep\n");
-		else if (ac == 6 && data->nb_meals < 1)
-			error("Error: wrong number of meals\n");
-		else
-			error("Error: wrong arguments\n");
+		error("Error: wrong arguments\n");
 		return (1);
-	}	
+	}
 	return (0);
 }
 
-int philo(char **av, int ac)
+int	philo(char **av, int ac)
 {
-	t_data data;
+	t_data	data;
+
 	if (pars_input(av, ac, &data))
 		return (1);
 	init_values(&data);
 	start_simulation(&data);
-	// monitor(&data);
 	return (0);
 }
 
-
-
-
-
-
-
-
-
-
-
+	// monitor(&data);
 // void *routine(void *args)
 // {
 // 	t_args *arg = (t_args *)args;
@@ -112,5 +93,4 @@ int philo(char **av, int ac)
 // 		pthread_create(&philo.philo[i], NULL, &routine, args);
 // 		i++;
 // 	}
-	
 // }
