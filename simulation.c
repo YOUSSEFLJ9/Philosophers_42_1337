@@ -6,7 +6,7 @@
 /*   By: ymomen <ymomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 02:49:42 by ymomen            #+#    #+#             */
-/*   Updated: 2024/06/02 01:23:10 by ymomen           ###   ########.fr       */
+/*   Updated: 2024/06/02 21:02:26 by ymomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,44 +20,29 @@ long	get_time(void)
 	return (current_time.tv_sec * 1000 + current_time.tv_usec / 1000);
 }
 
-long	get_time_milli(long start_time)
-{
-	struct timeval	current_time;
-	long			time;
-
-	if (gettimeofday(&current_time, NULL) == -1)
-		return (-1);
-	time = (current_time.tv_sec * 1000 + current_time.tv_usec / 1000) \
-	- start_time;
-	return (time);
-}
-
 void	wait_all_philos(t_philo *philo)
 {
 	while (get_variable_int(&(philo->data->all_ready_mtx),
-			philo->data->all_ready) != 1)
+			&(philo->data->all_ready)) != 1)
 		;
 }
 
 void	eat(t_philo *philo)
 {
-	if (get_variable_int((&philo->data->is_die_mtx), philo->data->is_die))
+	if (get_variable_int((&philo->data->is_die_mtx), &(philo->data->is_die)))
 		return ;
 	save_mutex(philo->first_fk, LOCK);
 	save_mutex(philo->second_fk, LOCK);
-	if (!get_variable_int((&philo->data->is_die_mtx), philo->data->is_die))
+	if (!get_variable_int((&philo->data->is_die_mtx), &(philo->data->is_die)))
 	{
 		save_mutex(&philo->data->print, LOCK);
-		printf("%ld %d philo has taken a fork\n", get_time() - \
-		philo->data->start_time, philo->idx);
-		printf("%ld %d philo has taken a fork\n", get_time() - \
-		philo->data->start_time, philo->idx);
-		printf("%ld %d philo is eating\n", get_time() - \
-		philo->data->start_time, philo->idx);
+		display_msg(philo, "philo has taken a fork");
+		display_msg(philo, "philo has taken a fork");
+		display_msg(philo, "philo is eating");
 		save_mutex(&philo->data->print, UNLOCK);
 		philo->meals_cont++;
 		my_usleep(get_variable_int((&philo->data->sleep_mtx), \
-		philo->data->time_to_eat));
+		&(philo->data->time_to_eat)));
 		philo->last_meal_time = get_time();
 	}
 	save_mutex(philo->first_fk, UNLOCK);
@@ -75,19 +60,19 @@ void	*simulation_routine(void *args)
 	while (1)
 	{
 		if (get_variable_int(&(philo->data->all_ready_mtx), \
-		philo->data->nb_meals) != -1 && philo->meals_cont == get_variable_int \
-		(&(philo->data->all_ready_mtx), philo->data->nb_meals))
+		&(philo->data->nb_meals)) != -1 && philo->meals_cont == get_variable_int\
+		(&(philo->data->all_ready_mtx), &(philo->data->nb_meals)))
 			break ;
-		if (get_variable_int(&(philo->data->is_die_mtx), philo->data->is_die))
+		if (get_variable_int(&(philo->data->is_die_mtx), &(philo->data->is_die)))
 			return (NULL);
 		eat(philo);
-		if (get_variable_int((&philo->data->is_die_mtx), philo->data->is_die))
+		if (get_variable_int((&philo->data->is_die_mtx), &(philo->data->is_die)))
 			return (NULL);
 		save_mutex(&philo->data->print, LOCK);
 		display_msg(philo, "philo is sleeping");
 		save_mutex(&philo->data->print, UNLOCK);
 		my_usleep(philo->data->time_to_sleep);
-		if (get_variable_int((&philo->data->is_die_mtx), philo->data->is_die))
+		if (get_variable_int((&philo->data->is_die_mtx), &(philo->data->is_die)))
 			return (NULL);
 		save_mutex(&philo->data->print, LOCK);
 		display_msg(philo, "philo is thinking");
@@ -103,7 +88,7 @@ void	start_simulation(t_data *data)
 	i = -1;
 	if (data->nb_meals == 0)
 		return ;
-	data->start_time = get_time();
+	set_variable(&(data->start_time_mtx), &data->start_time, get_time());
 	if (data->nb_philo == 1)
 	{
 		display_msg(data->philo, "philo has taken a fork");
@@ -113,8 +98,9 @@ void	start_simulation(t_data *data)
 	else
 	{
 		while (++i < data->nb_philo)
-			pthread_create(&data->philo[i].philo, NULL, simulation_routine, &data->philo[i]);
-		set_variable_int((&data->all_ready_mtx), &data->all_ready, 1);
+			pthread_create(&data->philo[i].philo, NULL, \
+			simulation_routine, &data->philo[i]);
+		set_variable_int(&(data->all_ready_mtx), &data->all_ready, 1);
 		i = -1;
 		monitor(data);
 		while (++i < data->nb_philo)

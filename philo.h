@@ -6,7 +6,7 @@
 /*   By: ymomen <ymomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 12:34:23 by ymomen            #+#    #+#             */
-/*   Updated: 2024/06/02 00:54:06 by ymomen           ###   ########.fr       */
+/*   Updated: 2024/06/02 20:53:46 by ymomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct s_data
 	int				nb_meals;
 	int				all_ready;
 	long			start_time;//check after
+	pthread_mutex_t	start_time_mtx;
 	t_philo			*philo;
 	int				is_die;
 	pthread_mutex_t	sleep_mtx;
@@ -72,10 +73,10 @@ int		philo(char **av, int ac);
 int		ft_atoi(const char *str);
 void	error(char *str);
 /*DATA_FROM_VAR_PROTECT_WITH_MUTEX*/
-int		get_variable_int(pthread_mutex_t *mutex, int var);
+int		get_variable_int(pthread_mutex_t *mutex, int *var);
 int		set_variable_int(pthread_mutex_t *mutex, int *var, int value);
 int		increce_variable(pthread_mutex_t *mutex, long *var);
-long	get_variable(pthread_mutex_t *mutex, long var);
+long	get_variable(pthread_mutex_t *mutex, long *var);
 int		set_variable(pthread_mutex_t *mutex, long *var, long value);
 
 #endif /*PHILO_H*/

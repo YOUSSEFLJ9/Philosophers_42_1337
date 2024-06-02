@@ -6,7 +6,7 @@
 /*   By: ymomen <ymomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 19:30:41 by ymomen            #+#    #+#             */
-/*   Updated: 2024/06/02 00:52:23 by ymomen           ###   ########.fr       */
+/*   Updated: 2024/06/02 20:54:29 by ymomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,13 +78,17 @@ int	init_values(t_data *data)
 	if (!data->forks)
 		return (free(data->philo), 1);
 	i = -1;
-	data->all_ready = 0;
-	data->is_die = 0;
 	if (save_mutex(&(data->all_ready_mtx), INIT) || save_mutex(\
 		&(data->is_die_mtx), INIT) || save_mutex(&(data->sleep_mtx), INIT)
 		|| save_mutex(&(data->last_meal_mtx), INIT
-			|| save_mutex(&(data->print), INIT)))
+			|| save_mutex(&(data->print), INIT)) || save_mutex(&(data->start_time_mtx), INIT))
 		return (1);
+	save_mutex(&(data->all_ready_mtx), LOCK);
+	data->all_ready = 0;
+	save_mutex(&(data->all_ready_mtx), UNLOCK);
+	save_mutex(&(data->is_die_mtx), LOCK);
+	data->is_die = 0;
+	save_mutex(&(data->is_die_mtx), UNLOCK);
 	while (++i < data->nb_philo)
 	{
 		if (save_mutex(&(data->forks[i]), INIT))
