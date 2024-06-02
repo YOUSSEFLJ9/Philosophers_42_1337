@@ -6,7 +6,7 @@
 /*   By: ymomen <ymomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 17:05:08 by ymomen            #+#    #+#             */
-/*   Updated: 2024/06/02 23:26:25 by ymomen           ###   ########.fr       */
+/*   Updated: 2024/06/03 00:46:01 by ymomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ void	my_usleep(long time)
 void	display_msg(t_philo *philo, char *str)
 {
 	save_mutex(&philo->data->toprint, LOCK);
-	printf("%ld %d %s\n", get_time() - get_var(&(philo->data->starttimemtx), &(philo->data->start_time)), \
+	printf("%ld %d %s\n", get_time() - get_var(&(philo->data->starttimemtx),
+			&(philo->data->start_time)), \
 	philo->idx, str);
 	save_mutex(&philo->data->toprint, UNLOCK);
 }

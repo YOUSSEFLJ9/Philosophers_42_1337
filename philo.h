@@ -6,7 +6,7 @@
 /*   By: ymomen <ymomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 12:34:23 by ymomen            #+#    #+#             */
-/*   Updated: 2024/06/02 23:31:55 by ymomen           ###   ########.fr       */
+/*   Updated: 2024/06/03 00:50:07 by ymomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,22 +44,22 @@ typedef struct s_philo
 typedef struct s_data
 {
 	int				nb_philo;
-	pthread_mutex_t nb_philomtx;
+	pthread_mutex_t	nb_philomtx;
 	int				time_to_die;
-	pthread_mutex_t todie_mtx;
+	pthread_mutex_t	todie_mtx;
 	int				time_to_eat;
-	pthread_mutex_t toeat_mtx;
+	pthread_mutex_t	toeat_mtx;
 	int				time_to_sleep;
-	pthread_mutex_t tosleep_mtx;
+	pthread_mutex_t	tosleep_mtx;
 	int				nb_meals;
-	pthread_mutex_t nb_mealmtx;
+	pthread_mutex_t	nb_mealmtx;
 	int				all_ready;
-	pthread_mutex_t readymtx;
+	pthread_mutex_t	readymtx;
 	long			start_time;
-	pthread_mutex_t starttimemtx;
+	pthread_mutex_t	starttimemtx;
 	t_philo			*philo;
 	int				is_die;
-	pthread_mutex_t isdiemtx;
+	pthread_mutex_t	isdiemtx;
 	pthread_mutex_t	toprint;
 	pthread_mutex_t	*forks; // array of forks start from 0 to nb_philo - 1
 }	t_data;

@@ -6,7 +6,7 @@
 /*   By: ymomen <ymomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 19:30:41 by ymomen            #+#    #+#             */
-/*   Updated: 2024/06/02 23:42:49 by ymomen           ###   ########.fr       */
+/*   Updated: 2024/06/03 00:43:09 by ymomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,23 @@ static int	init_philos(t_philo *philo, t_data *data)
 	return (0);
 }
 
+int	init_mutexs(t_data *data)
+{
+	int	ret;
+
+	ret = 0;
+	ret += save_mutex(&data->nb_philomtx, INIT);
+	ret += save_mutex(&data->todie_mtx, INIT);
+	ret += save_mutex(&data->toeat_mtx, INIT);
+	ret += save_mutex(&data->tosleep_mtx, INIT);
+	ret += save_mutex(&data->nb_mealmtx, INIT);
+	ret += save_mutex(&data->readymtx, INIT);
+	ret += save_mutex(&data->starttimemtx, INIT);
+	ret += save_mutex(&data->isdiemtx, INIT);
+	ret += save_mutex(&data->toprint, INIT);
+	return (ret);
+}
+
 int	init_values(t_data *data)
 {
 	int	i;
@@ -82,7 +99,7 @@ int	init_values(t_data *data)
 	i = -1;
 	data->all_ready = 0;
 	data->is_die = 0;
-	if (save_mutex(&data->todie_mtx, INIT) || save_mutex(&data->toeat_mtx, INIT) || save_mutex(&data->tosleep_mtx, INIT) || save_mutex(&data->nb_mealmtx, INIT) || save_mutex(&data->readymtx, INIT) || save_mutex(&data->starttimemtx, INIT) || save_mutex(&data->isdiemtx, INIT) || save_mutex(&data->toprint, INIT) || save_mutex(&data->nb_philomtx, INIT))
+	if (init_mutexs(data))
 		return (1);
 	while (++i < data->nb_philo)
 	{

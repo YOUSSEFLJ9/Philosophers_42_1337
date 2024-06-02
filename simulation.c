@@ -6,7 +6,7 @@
 /*   By: ymomen <ymomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 02:49:42 by ymomen            #+#    #+#             */
-/*   Updated: 2024/06/03 00:27:59 by ymomen           ###   ########.fr       */
+/*   Updated: 2024/06/03 00:45:45 by ymomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,9 @@ void	*simulation_routine(void *args)
 		usleep(600);
 	while (1)
 	{
-		if (get_var_int(&(philo->data->nb_mealmtx), \
-		&(philo->data->nb_meals)) != -1 && get_var(&(philo->save_mutex), &(philo->meals_cont)) == get_var_int(&(philo->data->nb_mealmtx), &(philo->data->nb_meals)))
+		if (get_var_int(&(philo->data->nb_mealmtx), &(philo->data->nb_meals)) \
+		!= -1 && get_var(&(philo->save_mutex), &(philo->meals_cont)) == \
+		get_var_int(&(philo->data->nb_mealmtx), &(philo->data->nb_meals)))
 			break ;
 		if (get_var_int(&(philo->data->isdiemtx), &(philo->data->is_die)))
 			return (NULL);
@@ -66,7 +67,8 @@ void	*simulation_routine(void *args)
 		if (get_var_int(&(philo->data->isdiemtx), &(philo->data->is_die)))
 			return (NULL);
 		display_msg(philo, "philo is sleeping");
-		my_usleep(get_var_int(&(philo->data->tosleep_mtx), &(philo->data->time_to_sleep)));
+		my_usleep(get_var_int(&(philo->data->tosleep_mtx),
+				&(philo->data->time_to_sleep)));
 		if (get_var_int(&(philo->data->isdiemtx), &(philo->data->is_die)))
 			return (NULL);
 		display_msg(philo, "philo is thinking");
@@ -91,7 +93,8 @@ void	start_simulation(t_data *data)
 	else
 	{
 		while (++i < data->nb_philo)
-			pthread_create(&data->philo[i].philo, NULL, simulation_routine, &data->philo[i]);
+			pthread_create(&data->philo[i].philo, NULL, simulation_routine,
+				&data->philo[i]);
 		set_var_int((&data->readymtx), &(data->all_ready), 1);
 		i = -1;
 		monitor(data);
