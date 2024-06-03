@@ -6,7 +6,7 @@
 /*   By: ymomen <ymomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 02:49:42 by ymomen            #+#    #+#             */
-/*   Updated: 2024/06/03 19:52:03 by ymomen           ###   ########.fr       */
+/*   Updated: 2024/06/03 20:49:47 by ymomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	*simulation_routine(void *args)
 
 	philo = (t_philo *)args;
 	if (philo->idx % 2 == 0)
-		my_usleep(40, philo->data);
+		my_usleep(60, philo->data);
 	while (1)
 	{
 		if (get_var_int(&(philo->data->isdiemtx), &(philo->data->is_die)))

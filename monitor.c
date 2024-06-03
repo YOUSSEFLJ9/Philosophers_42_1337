@@ -6,7 +6,7 @@
 /*   By: ymomen <ymomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 15:41:20 by ymomen            #+#    #+#             */
-/*   Updated: 2024/06/03 20:03:55 by ymomen           ###   ########.fr       */
+/*   Updated: 2024/06/03 20:53:23 by ymomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,3 @@ void	monitor(t_data *data, int i, int all_ready)
 			break ;
 	}
 }
-
-// 	printf("%ld %d philo is die\n", get_time() - get_var \
-// (&(data->starttimemtx), &(data->start_time)), data->philo[i].idx);
