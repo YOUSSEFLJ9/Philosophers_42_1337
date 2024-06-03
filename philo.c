@@ -6,7 +6,7 @@
 /*   By: ymomen <ymomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 17:20:07 by ymomen            #+#    #+#             */
-/*   Updated: 2024/06/03 00:38:00 by ymomen           ###   ########.fr       */
+/*   Updated: 2024/06/03 19:26:30 by ymomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,29 @@ static int	pars_input(char **av, int ac, t_data *data)
 	return (0);
 }
 
+void	destroy_values(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	save_mutex(&data->toprint, DESTROY);
+	save_mutex(&data->isdiemtx, DESTROY);
+	save_mutex(&data->nb_philomtx, DESTROY);
+	save_mutex(&data->todie_mtx, DESTROY);
+	save_mutex(&data->toeat_mtx, DESTROY);
+	save_mutex(&data->tosleep_mtx, DESTROY);
+	save_mutex(&data->nb_mealmtx, DESTROY);
+	save_mutex(&data->readymtx, DESTROY);
+	save_mutex(&data->starttimemtx, DESTROY);
+	while (i < data->nb_philo)
+	{
+		save_mutex(&data->philo[i].save_mutex, DESTROY);
+		i++;
+	}
+	free(data->philo);
+	free(data->forks);
+}
+
 int	philo(char **av, int ac)
 {
 	t_data	data;
@@ -39,5 +62,6 @@ int	philo(char **av, int ac)
 		return (1);
 	init_values(&data);
 	start_simulation(&data);
+	destroy_values(&data);
 	return (0);
 }

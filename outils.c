@@ -6,7 +6,7 @@
 /*   By: ymomen <ymomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 17:05:08 by ymomen            #+#    #+#             */
-/*   Updated: 2024/06/03 00:46:01 by ymomen           ###   ########.fr       */
+/*   Updated: 2024/06/03 20:03:10 by ymomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,11 @@ void	error(char *str)
 	return ;
 }
 
-void	my_usleep(long time)
+void	my_usleep(long time, t_data *data)
 {
 	long	time_now;
 
+	(void)data;
 	time_now = get_time();
 	while ((get_time() - time_now) < time)
 	{
@@ -42,8 +43,19 @@ void	my_usleep(long time)
 void	display_msg(t_philo *philo, char *str)
 {
 	save_mutex(&philo->data->toprint, LOCK);
-	printf("%ld %d %s\n", get_time() - get_var(&(philo->data->starttimemtx),
-			&(philo->data->start_time)), \
-	philo->idx, str);
+	if (get_var_int(&(philo->data->isdiemtx), &(philo->data->is_die)) == 0)
+	{
+		printf("%ld %d %s\n", get_time() - get_var(&(philo->data->starttimemtx),
+				&(philo->data->start_time)), \
+		philo->idx, str);
+	}
+	save_mutex(&philo->data->toprint, UNLOCK);
+}
+
+void	philo_die(t_philo *philo, char *str)
+{
+	save_mutex(&philo->data->toprint, LOCK);
+	printf("%ld %d %s\n", get_time() - get_var(&(philo->data->starttimemtx), \
+		&(philo->data->start_time)), philo->idx, str);
 	save_mutex(&philo->data->toprint, UNLOCK);
 }

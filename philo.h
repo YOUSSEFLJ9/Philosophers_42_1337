@@ -6,7 +6,7 @@
 /*   By: ymomen <ymomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 12:34:23 by ymomen            #+#    #+#             */
-/*   Updated: 2024/06/03 00:50:07 by ymomen           ###   ########.fr       */
+/*   Updated: 2024/06/03 19:35:48 by ymomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,11 @@ typedef struct s_data
 }	t_data;
 
 /* FUNCTIONS */
+void	philo_die(t_philo *philo, char *str);
 void	display_msg(t_philo *philo, char *str);
 long	get_time(void);
-void	monitor(t_data *data);
-void	my_usleep(long time);
+void	monitor(t_data *data, int i, int all_ready);
+void	my_usleep(long time, t_data *data);
 long	get_time_milli(long start_time);
 void	start_simulation(t_data *data);
 int		save_mutex(pthread_mutex_t *mutex, t_mutex type);

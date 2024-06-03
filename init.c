@@ -6,7 +6,7 @@
 /*   By: ymomen <ymomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 19:30:41 by ymomen            #+#    #+#             */
-/*   Updated: 2024/06/03 00:43:09 by ymomen           ###   ########.fr       */
+/*   Updated: 2024/06/03 04:51:56 by ymomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ int	save_mutex(pthread_mutex_t *mutex, t_mutex type)
 		ret = pthread_mutex_lock(mutex);
 	else if (type == UNLOCK)
 		ret = pthread_mutex_unlock(mutex);
-	if (ret != 0)
-		error("Error in mutex\n");
 	return (ret);
 }
 
@@ -61,7 +59,7 @@ static int	init_philos(t_philo *philo, t_data *data)
 		philo[i].is_full = 0;
 		philo[i].last_meal_time = get_time();
 		philo[i].data = data;
-		if (save_mutex(&philo[i].save_mutex, INIT))
+		if (save_mutex(&(philo[i].save_mutex), INIT))
 			return (1);
 		assign_forks(data, i);
 		i++;

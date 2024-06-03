@@ -1,0 +1,317 @@
+1 31 philo has taken a fork
+1 31 philo has taken a fork
+1 31 philo is eating
+1 17 philo has taken a fork
+1 17 philo has taken a fork
+1 17 philo is eating
+1 35 philo has taken a fork
+1 35 philo has taken a fork
+1 35 philo is eating
+1 37 philo has taken a fork
+1 37 philo has taken a fork
+1 37 philo is eating
+1 19 philo has taken a fork
+1 19 philo has taken a fork
+1 19 philo is eating
+1 39 philo has taken a fork
+1 39 philo has taken a fork
+1 39 philo is eating
+1 41 philo has taken a fork
+1 41 philo has taken a fork
+1 41 philo is eating
+1 43 philo has taken a fork
+1 43 philo has taken a fork
+1 43 philo is eating
+1 45 philo has taken a fork
+1 45 philo has taken a fork
+1 45 philo is eating
+1 47 philo has taken a fork
+1 47 philo has taken a fork
+1 47 philo is eating
+1 49 philo has taken a fork
+1 49 philo has taken a fork
+1 49 philo is eating
+1 51 philo has taken a fork
+1 51 philo has taken a fork
+1 51 philo is eating
+1 53 philo has taken a fork
+1 53 philo has taken a fork
+1 53 philo is eating
+1 55 philo has taken a fork
+1 55 philo has taken a fork
+1 55 philo is eating
+1 57 philo has taken a fork
+1 57 philo has taken a fork
+1 57 philo is eating
+1 59 philo has taken a fork
+1 59 philo has taken a fork
+1 59 philo is eating
+1 61 philo has taken a fork
+1 61 philo has taken a fork
+1 61 philo is eating
+1 63 philo has taken a fork
+1 63 philo has taken a fork
+1 63 philo is eating
+1 65 philo has taken a fork
+1 65 philo has taken a fork
+1 65 philo is eating
+1 7 philo has taken a fork
+1 7 philo has taken a fork
+1 7 philo is eating
+1 1 philo has taken a fork
+1 1 philo has taken a fork
+1 1 philo is eating
+1 69 philo has taken a fork
+1 69 philo has taken a fork
+1 69 philo is eating
+1 21 philo has taken a fork
+1 21 philo has taken a fork
+1 21 philo is eating
+1 71 philo has taken a fork
+1 71 philo has taken a fork
+1 71 philo is eating
+1 3 philo has taken a fork
+1 3 philo has taken a fork
+1 3 philo is eating
+1 5 philo has taken a fork
+1 25 philo has taken a fork
+1 25 philo has taken a fork
+1 9 philo has taken a fork
+1 9 philo has taken a fork
+1 9 philo is eating
+1 5 philo has taken a fork
+1 5 philo is eating
+1 25 philo is eating
+1 75 philo has taken a fork
+1 75 philo has taken a fork
+1 75 philo is eating
+1 11 philo has taken a fork
+1 11 philo has taken a fork
+1 11 philo is eating
+1 13 philo has taken a fork
+1 13 philo has taken a fork
+1 13 philo is eating
+1 27 philo has taken a fork
+1 27 philo has taken a fork
+1 27 philo is eating
+1 79 philo has taken a fork
+1 15 philo has taken a fork
+1 15 philo has taken a fork
+1 15 philo is eating
+1 79 philo has taken a fork
+1 79 philo is eating
+1 33 philo has taken a fork
+1 33 philo has taken a fork
+1 33 philo is eating
+1 67 philo has taken a fork
+1 67 philo has taken a fork
+1 67 philo is eating
+1 23 philo has taken a fork
+1 23 philo has taken a fork
+1 23 philo is eating
+1 73 philo has taken a fork
+1 73 philo has taken a fork
+1 73 philo is eating
+1 77 philo has taken a fork
+1 77 philo has taken a fork
+1 77 philo is eating
+1 29 philo has taken a fork
+1 29 philo has taken a fork
+1 29 philo is eating
+131 71 philo is sleeping
+131 79 philo is sleeping
+131 63 philo is sleeping
+131 53 philo is sleeping
+131 55 philo is sleeping
+131 7 philo is sleeping
+131 45 philo is sleeping
+131 29 philo is sleeping
+131 25 philo is sleeping
+131 23 philo is sleeping
+131 49 philo is sleeping
+131 73 philo is sleeping
+131 11 philo is sleeping
+131 17 philo is sleeping
+131 9 philo is sleeping
+131 51 philo is sleeping
+131 64 philo has taken a fork
+131 64 philo has taken a fork
+131 64 philo is eating
+131 3 philo is sleeping
+131 37 philo is sleeping
+131 1 philo is sleeping
+131 66 philo has taken a fork
+131 27 philo is sleeping
+131 15 philo is sleeping
+131 56 philo has taken a fork
+131 65 philo is sleeping
+131 56 philo has taken a fork
+131 56 philo is eating
+131 54 philo has taken a fork
+131 6 philo has taken a fork
+131 54 philo has taken a fork
+131 6 philo has taken a fork
+131 54 philo is eating
+131 57 philo is sleeping
+131 44 philo has taken a fork
+131 43 philo is sleeping
+131 44 philo has taken a fork
+131 60 philo has taken a fork
+131 60 philo has taken a fork
+131 50 philo has taken a fork
+131 26 philo has taken a fork
+131 34 philo has taken a fork
+131 12 philo has taken a fork
+131 34 philo has taken a fork
+131 12 philo has taken a fork
+131 34 philo is eating
+131 58 philo has taken a fork
+131 58 philo has taken a fork
+131 14 philo has taken a fork
+131 74 philo has taken a fork
+131 80 philo has taken a fork
+131 74 philo has taken a fork
+131 80 philo has taken a fork
+131 74 philo is eating
+131 80 philo is eating
+131 31 philo is sleeping
+131 75 philo is sleeping
+131 62 philo has taken a fork
+131 66 philo has taken a fork
+131 62 philo has taken a fork
+131 62 philo is eating
+131 66 philo is eating
+131 67 philo is sleeping
+131 42 philo has taken a fork
+131 42 philo has taken a fork
+131 42 philo is eating
+131 4 philo has taken a fork
+131 4 philo has taken a fork
+131 4 philo is eating
+131 61 philo is sleeping
+131 40 philo has taken a fork
+131 40 philo has taken a fork
+131 33 philo is sleeping
+131 48 philo has taken a fork
+131 48 philo has taken a fork
+131 20 philo has taken a fork
+131 41 philo is sleeping
+131 20 philo has taken a fork
+131 48 philo is eating
+131 20 philo is eating
+131 72 philo has taken a fork
+131 72 philo has taken a fork
+131 77 philo is sleeping
+131 72 philo is eating
+131 18 philo has taken a fork
+131 18 philo has taken a fork
+131 19 philo is sleeping
+131 18 philo is eating
+131 50 philo has taken a fork
+131 50 philo is eating
+131 2 philo has taken a fork
+131 26 philo has taken a fork
+131 2 philo has taken a fork
+131 2 philo is eating
+131 26 philo is eating
+131 35 philo is sleeping
+131 12 philo is eating
+131 36 philo has taken a fork
+131 36 philo has taken a fork
+131 36 philo is eating
+131 14 philo has taken a fork
+131 14 philo is eating
+131 13 philo is sleeping
+131 78 philo has taken a fork
+131 78 philo has taken a fork
+131 78 philo is eating
+131 47 philo is sleeping
+131 6 philo is eating
+131 38 philo has taken a fork
+131 44 philo is eating
+131 38 philo has taken a fork
+131 28 philo has taken a fork
+131 38 philo is eating
+131 28 philo has taken a fork
+131 28 philo is eating
+131 39 philo is sleeping
+131 22 philo has taken a fork
+131 22 philo has taken a fork
+131 22 philo is eating
+131 8 philo has taken a fork
+131 8 philo has taken a fork
+131 8 philo is eating
+131 16 philo has taken a fork
+131 16 philo has taken a fork
+131 16 philo is eating
+131 58 philo is eating
+131 59 philo is sleeping
+131 32 philo has taken a fork
+131 32 philo has taken a fork
+131 32 philo is eating
+131 52 philo has taken a fork
+131 52 philo has taken a fork
+131 52 philo is eating
+131 5 philo is sleeping
+131 40 philo is eating
+131 21 philo is sleeping
+131 10 philo has taken a fork
+131 10 philo has taken a fork
+131 10 philo is eating
+131 60 philo is eating
+131 30 philo has taken a fork
+131 30 philo has taken a fork
+131 30 philo is eating
+131 24 philo has taken a fork
+131 24 philo has taken a fork
+131 24 philo is eating
+131 76 philo has taken a fork
+131 76 philo has taken a fork
+131 76 philo is eating
+131 46 philo has taken a fork
+131 46 philo has taken a fork
+131 46 philo is eating
+261 18 philo is sleeping
+261 8 philo is sleeping
+261 36 philo is sleeping
+261 76 philo is sleeping
+261 46 philo is sleeping
+261 40 philo is sleeping
+261 20 philo is sleeping
+261 29 philo is thinking
+261 66 philo is sleeping
+261 26 philo is sleeping
+261 6 philo is sleeping
+261 30 philo is sleeping
+261 12 philo is sleeping
+261 42 philo is sleeping
+261 48 philo is sleeping
+261 80 philo is sleeping
+261 2 philo is sleeping
+261 62 philo is sleeping
+261 14 philo is sleeping
+261 10 philo is sleeping
+261 22 philo is sleeping
+261 28 philo is sleeping
+261 50 philo is sleeping
+261 38 philo is sleeping
+261 52 philo is sleeping
+261 29 philo has taken a fork
+261 29 philo has taken a fork
+261 29 philo is eating
+261 71 philo is thinking
+261 54 philo is sleeping
+261 56 philo is sleeping
+261 72 philo is sleeping
+261 24 philo is sleeping
+261 34 philo is sleeping
+261 58 philo is sleeping
+261 44 philo is sleeping
+261 32 philo is sleeping
+261 64 philo is sleeping
+261 74 philo is sleeping
+261 4 philo is sleeping
+261 60 philo is sleeping
+261 78 philo is sleeping
+351 16 philo is sleeping
+351 70 philo is die
